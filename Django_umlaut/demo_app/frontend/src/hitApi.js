@@ -21,9 +21,28 @@ const hit_line_a = () => {
     redirect: 'follow'
     };
     
-
     fetch(URL, requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
     }
+
+
+const calculateForm = () => {
+    let shift_model = parseInt(document.getElementById("shift_model").value, 10) || 0
+    let std_shift_time_gross = parseInt(document.getElementById("std_shift_time_gross").value, 10) || 0
+    let start_up = parseInt(document.getElementById("start_up").value, 10) || 0
+    let break_ = parseInt(document.getElementById("break_").value, 10) || 0
+    let lunch = parseInt(document.getElementById("lunch").value, 10)|| 0
+    let others = parseInt(document.getElementById("others").value, 10) || 0
+    let days_weeks = parseInt(document.getElementById("days_weeks").value, 10) || 0
+    let weeks = parseInt(document.getElementById("weeks").value, 10) || 0
+
+    let break_time = start_up + break_ + lunch + others
+    let shift_net = std_shift_time_gross - break_time
+    console.log(break_time, shift_net)
+    console.log(start_up, break_, lunch, others, std_shift_time_gross, break_time)
+
+    document.getElementById("total_break_time").value = `${break_time}`
+    document.getElementById("std_shift_time").value = `${shift_net}`
+}
